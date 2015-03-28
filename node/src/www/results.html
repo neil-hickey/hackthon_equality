@@ -13,6 +13,20 @@
 </head>
 <body>
 
+	<section class="header">
+
+     <nav id="header-bar" class="navbar navbar-inverse navbar-fixed-top">
+         <div class="container">
+               <div class="navbar-header">
+                 <a class="navbar-brand" href="yesequality.ie">
+                   <img src="image/Miles4Marriage.png" height="90px"/>
+                 </a>
+               </div>
+         </div>
+     </nav>
+     <br><br><br><br><br>
+   </section>
+
 <div id="map" style="width: 50%; display:inline-block;">
 	&nbsp;
 </div>
@@ -110,7 +124,7 @@ $(document).ready(function(){
 	var countUrl = "http://www.google.ie";
 	var travellingFrom = "PLACEHOLDER_FROM";
 	var travellingTo = "PLACEHOLDER_TO";
-	var liftSrc = "/tweet?from=" + travellingFrom + "&to=" + travellingTo;
+	var needLiftSrc = "/tweet?from=" + travellingFrom + "&to=" + travellingTo + "&need=1";
 
 	var twitterBtnHref = "https://twitter.com/share?text=" + shareText + "&url=" + encodedUrl + "&hashtags=" + hashTags + "&counturl=" + countUrl + "&via=yesequality2015";
 
@@ -119,7 +133,7 @@ $(document).ready(function(){
 	showTwitterShareButton(twitterBtnHref);
 gapi.plusone.go();
 	$(".collapse").collapse();
-	$("#liftIframe").attr('src', liftSrc)
+	$("#liftIframe").attr('src', needLiftSrc)
 });
 
 
