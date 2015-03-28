@@ -1,0 +1,10 @@
+#map canvas {
+  max-width: 400px;
+}
+
+#rainbow-bar {
+  background: -webkit-linear-gradient(left, red , blue); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, red, blue); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, red, blue); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, red , blue); /* Standard syntax */
+}
