@@ -1,17 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Head Coach</title>
-        <link rel="stylesheet" type="text/css" href="css/app.css">
-    </head>
-    <body>
-        <div id="main">
-            <div class="phone">
-                <img src="img/iphone.png" height="700px"></img>
-                <div class="app">
-                    <iframe src="embedded.html" height="480px" width="320px" ></iframe>
-                </div>
-            </div>
-        </div>
-    </body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+    <title>Miles for Marriage</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" />
+
+  </head>
+  <body>
+
+  <div class="site-wrapper">
+
+   <section class="header">
+
+     <nav id="header-bar" class="navbar navbar-inverse navbar-fixed-top">
+         <div class="container">
+               <div class="navbar-header">
+                 <a class="navbar-brand" href="yesequality.ie">
+                   <img src="image/Miles4Marriage.png" height="90px"/>
+                 </a>
+               </div>
+         </div>
+     </nav>
+     <br><br><br><br><br>
+     <h1>How Far Are You Going To Travel To Support Equality?</h1>
+   </section>
+
+   <section class="widget">
+
+     <div id="map" style="display: inline-block">
+      <canvas width="300" height="400">You have to support canvas</canvas>
+     </div>
+
+     <div id="input" style="display: inline-block" float="right">
+       <table>
+         <tr>
+          <td>From: </td>
+          <td><input id="town_from" /><small class="hidden"><br/>Please choose from the drop down</small></td>
+         </tr>
+         <tr>
+          <td>To: </td>
+          <td><input id="town_to" /> <small class="hidden"><br/>Please choose from the drop down</small> </td>
+         </tr>
+         <tr>
+           <td></td>
+           <td><center><input type="image" src="image/calc.jpg" width="120px"></center></td>
+         </tr>
+       </table>
+     </div>
+
+   </section>
+
+
+   <section class="footer">
+
+   </section>
+
+  </div>
+
+  </body>
+
+  <script src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="/vendor/geocomplete/jquery.geocomplete.js"></script>
+  <script src="script.js"></script>
+
 </html>
