@@ -25,7 +25,11 @@ def tweet():
     """Gets locations and tweets"""
     _from = request.args.get('from','')
     _to = request.args.get('to','')
-    text = "I am offering a lift from " + _from + " to " + _to + " on May 22nd! "
+    text = ''
+    if "give" in request.args:
+        text = "I am offering a lift from " + _from + " to " + _to + " on May 22nd! "
+    elif "need" in request.args:
+        text = "I need a lift from {0} to {1} on May 22nd".format(_from, _to)
     print urllib.quote(text)
     twitter_code = ("<a href='https://twitter.com/intent/tweet?button_hashtag=LiftToVote&text=" + text + 
     "' class='twitter-hashtag-button' data-size='large'>Tweet #LiftToVote</a><script>!function(d,s,id)"
