@@ -4,11 +4,16 @@ var app = express();
 app.use( express.static( __dirname + '/../www' ) );
 
 //landing page
-/*
-app.get('/', function( req, res ){
-    res.send( "It works: " + new Date() );
+
+app.get('/directions', function (req, res) {
+    var _from = req.query['from']
+    var _to = req.query['to']
+    var api_key = "AIzaSyCLUu_ddLIhvxq9TamyKldfflyXfQrQYYM"
+    var url = "https://www.google.com/maps/embed/v1/directions?key=" + api_key + "&origin=" + _from + "&destination=" + _to + "&mode=transit";
+    var height = 640
+    var width = 480
+    res.send("<iframe src='" + url + "' height='" + height + "' width='" + width + "'></iframe>");
 });
-*/
 app.get('/tweet', function (req, res) {
     var _from = req.query['from']
     var _to = req.query['to']
