@@ -2,6 +2,14 @@
   max-width: 400px;
 }
 
+td {
+  padding: 10px;
+}
+
+#header-bar {
+  height: 110px;
+}
+
 #rainbow-bar {
   background: -webkit-linear-gradient(left, red , blue); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(right, red, blue); /* For Opera 11.1 to 12.0 */

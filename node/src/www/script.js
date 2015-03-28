@@ -14,8 +14,8 @@
 
      $canvas : $('canvas'),
 
-     setToLocation : function (name, latitude, longitude) {
 
+     setToLocation : function (name, latitude, longitude) {
 
        delete this.toLocation.waiting;
 
@@ -58,46 +58,38 @@
 
       this.clearCanvas();
 
-      if (!this.toLocation.waiting)
-        this.drawLocationToMap(this.toLocation);
-      
-      if (!this.fromLocation.waiting)
-        this.drawLocationToMap(this.fromLocation);
-      
       if (!this.toLocation.waiting && !this.toLocation.waiting)
         this.drawLineBetweenTwoLocations(this.fromLocation, this.toLocation);
 
+      if (!this.toLocation.waiting)
+        this.drawLocationToMap(this.toLocation, this.endImage);
+      
+      if (!this.fromLocation.waiting)
+        this.drawLocationToMap(this.fromLocation, this.startImage);
+      
+
      },
 
-     drawLocationToMap : function ( loc ) {
+     drawLocationToMap : function ( loc, image ) {
       var xy = this.getXYForLngLat(loc.longitude, loc.latitude);
-      this.drawEllipse(xy[0], xy[1], 20, 5);
-
+      //this.drawEllipse(xy[0], xy[1], 20, 5);
+      this.ctx.drawImage(image, xy[0]-image.width/2, xy[1]-image.width/2);
      },
 
 
      drawLineBetweenTwoLocations : function (loc1, loc2) {
-      var cursor = this.getXYForLngLat(loc1.longitude, loc1.latitude),
+      var xy1 = this.getXYForLngLat(loc1.longitude, loc1.latitude),
           xy2 = this.getXYForLngLat(loc2.longitude, loc2.latitude);
 
-      this.ctx.fillRect(cursor[0], cursor[1], 2, 2);
+      this.ctx.lineStyle = "#fff";
+      this.ctx.lineWidth = 10;
 
+      this.ctx.beginPath();
 
-      while (Math.abs(cursor[0] - xy2[0]) > 3 && Math.abs(cursor[1] - xy2[1]) > 3) {
-        if (cursor[0] > xy2[0]) {
-          cursor[0]--;
-        } else {
-          cursor[0]++;
-        }
+      this.ctx.moveTo(xy1[0], xy1[1]);
+      this.ctx.lineTo(xy2[0], xy2[1]);
 
-        if (cursor[1] > xy2) {
-          cursor[1]--;
-        } else {
-          cursor[1]++;
-        }
-        this.ctx.fillRect(cursor[0], cursor[1], 2, 2);
-      }
-
+      this.ctx.stroke();
 
        
      },
@@ -107,8 +99,7 @@
      },
 
      clearCanvas : function () {
-        this.ctx.drawImage(this.cachedImage, 0,0, this.canvas.width, this.canvas.height);
-
+        this.ctx.drawImage(this.cachedImage, 0, 0, this.canvas.width, this.canvas.height);
      },
 
      drawEllipse : function (centerX, centerY, width, height) {
@@ -151,6 +142,12 @@
       this.canvas = Widget.$canvas.get(0);
       this.ctx = Widget.canvas.getContext('2d')
 
+      this.startImage = new Image();
+      this.startImage.src = "/image/start.png";
+
+      this.endImage = new Image();
+      this.endImage.src = "/image/end.png";
+
       this.$townTo.geocomplete( { country : 'ie' })
        .bind('geocode:result', function (e, loc) {
         Widget.setToLocation(loc.address_components[0].long_name, loc.geometry.location.k, loc.geometry.location.D);
@@ -164,6 +161,23 @@
       this.sizeCanvas();
       this.copyImageToCanvas();
 
+     },
+
+     toRadians : function (angle) {
+       return value * Math.PI / 180;
+     },
+
+     calcCrow : function (lat1, lon1, lat2, lon2) {
+        var R = 3963,
+            dLat = toRad(lat2-lat1),
+            dLon = toRad(lon2-lon1),
+            lat1 = toRad(lat1),
+            lat2 = toRad(lat2),
+            a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2),
+            c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)),
+            d = R * c;
+
+        return d;
      }
 
      
