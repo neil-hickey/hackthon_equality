@@ -25,11 +25,14 @@ def tweet():
     """Gets locations and tweets"""
     _from = request.args.get('from','')
     _to = request.args.get('to','')
+    get_or_offer = ''
     text = ''
     if "give" in request.args:
         text = "I am offering a lift from " + _from + " to " + _to + " on May 22nd! "
+        get_or_offer = "offer"
     elif "need" in request.args:
         text = "I need a lift from {0} to {1} on May 22nd".format(_from, _to)
+        get_or_offer = "request"
     print urllib.quote(text)
     twitter_code = ("<a href='https://twitter.com/intent/tweet?button_hashtag=LiftToVote&text=" + text + 
     "' class='twitter-hashtag-button' data-size='large'>Tweet #LiftToVote</a><script>!function(d,s,id)"
@@ -37,7 +40,7 @@ def tweet():
     "{js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}"
     "(document,'script', 'twitter-wjs');</script>")
 
-    return render_template('index.html',twitter_code=twitter_code)
+    return render_template('index.html',twitter_code=twitter_code, get_or_offer=get_or_offer)
 
 
 @app.route('/')
