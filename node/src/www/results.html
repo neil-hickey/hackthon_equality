@@ -5,6 +5,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 <script src="js/bootstrap.min.js"></script>
 <script src="js/fbsdk.js"></script>
+
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {parsetags: 'explicit'}
+</script>
+
 </head>
 <body>
 
@@ -46,13 +51,28 @@
 	            </div>
 	            <div id="collapseTwo" class="panel-collapse collapse">
 	                <div class="panel-body">
-	                          	To donate, visit yesequality.ie's <a href="https://www.yesequality.ie/donate/">donation page</a>.
+	                          	To donate, visit yesequality.ie's <a href="https://www.yesequality.ie/donate/">donation page</a>
 	                	<p><b>Where does the money go?</b></p>
 <p>&euro;25 = 100 badges to help spread the Yes Equality message</p>
 <p>&euro;50 = We can print 5,000 Yes Equality leaflets for canvassing in communities throughout the country</p>
 <p>&euro;75 = We can print and install 10 Yes Equality posters in local communities</p>
 <p>&euro;100 = We can run a Facebook ad for 2 weeks, with a total reach of 40,600 people
 </p>
+	                </div>
+	            </div>
+	        </div>
+
+
+
+	        	        <div class="panel panel-default">
+	            <div class="panel-heading">
+	                <h4 class="panel-title">
+	                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">I need a lift</a>
+	                </h4>
+	            </div>
+	            <div id="collapseThree" class="panel-collapse collapse">
+	                <div class="panel-body">
+	                          		<iframe src="/tweet" style="border: 0px; margin: 0px;"></iframe>
 	                </div>
 	            </div>
 	        </div>
@@ -63,7 +83,6 @@
 	</div>
 
 </div>
-<!-- END #rightbar -->
 
 
 
@@ -72,9 +91,10 @@
 
 		<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
 		
-		<script src="https://apis.google.com/js/plusone.js"></script>
 		<g:plus action="share" annotation="bubble"></g:plus>
 	</div>
+
+
 
 <script>
 
@@ -89,10 +109,11 @@ $(document).ready(function(){
 
 	var twitterBtnHref = "https://twitter.com/share?text=" + shareText + "&url=" + encodedUrl + "&hashtags=" + hashTags + "&counturl=" + countUrl + "&via=yesequality2015";
 
-	showTwitterShareButton(twitterBtnHref);
 
-	$(".collapse").collapse()
 	$("#milecount").text(miles);
+	showTwitterShareButton(twitterBtnHref);
+gapi.plusone.go();
+	$(".collapse").collapse();
 });
 
 
