@@ -1,0 +1,19 @@
+{
+  "name": "hh-headCoach-server",
+  "version": "0.0.1",
+  "author": "",
+  "description": "",
+  "contributors": [ 
+    {
+      "name": "",
+      "email": ""
+    } 
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies" : {
+    "express": "4.x"
+  }
+}

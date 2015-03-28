@@ -1,0 +1,486 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Miles for Marriage</title>
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" size="128x128" href="img/icon.png">
+
+        <link rel="stylesheet" type="text/css" href="css/app.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+        <link rel="stylesheet" href="//code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+        <script src="//code.jquery.com/jquery-1.6.4.min.js"></script>
+        <script src="//code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+
+        <script>
+          //global data-model
+          var data = {
+            total: 0
+          };
+
+          var addPoints = function( points ){
+              if( data.total + points <= 15 ){
+                  data.total += points; 
+              }
+          };
+
+          var resetPoints = function(){
+              data.total = 0;
+          };
+
+        function updatePoints(){
+            $( "#points" ).html( data.total );
+
+            if( data.total < 13 ){
+                window.location.hash = "assess-result";
+            }
+            else{
+                window.location.hash= "cognitive-assessment-start";
+            }
+        }
+        </script>
+    </head>
+    <body>
+        <div class="app-screen" data-role="page">
+            <img width="100%" src="img/splash.png"></img>
+        </div>
+        <!-- <div data-role="page" id="menu">
+            <div data-role="controlgroup">
+                <a href="#assess-start" data-role="button">Assess</a>
+                <a href="" data-role="button">Track</a>
+                <a href="#manage_menu" data-role="button">Manage</a>
+                <a href="" data-role="button">Learn</a>
+            </div>
+        </div>
+        <div data-role="page" id="assess-start">
+            <div data-role="header" style="height: 40px;">
+                <a href="#menu" data-icon="arrow-l" data-direction="reverse">Back</a>
+                <h2>Assessment</h2>
+            </div>
+            <form>
+           		<h1>This will take approximately 5 minutes.</h1>
+			</form>
+			
+            <div class="answers">
+            <a href="#UserInfo" data-role="button" onclick="resetPoints();">Begin</a>
+             <!-- progres bar -->
+           <!-- <div role="application" class="ui-slider-track ui-btn-down-c ui-btn-corner-all" style="margin: 0px 15px;"><div class="ui-slider-bg ui-btn-active ui-btn-corner-all" style="width: 20%; height:20px;"></div><a href="#" class="ui-slider-handle ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100" title="100" aria-labelledby="slider-label" style="left: 100%; display: none;"><span class="ui-btn-inner"><span class="ui-btn-text"></span></span></a></div>
+            </div>
+           
+        </div> -->
+
+       <div data-role="page" id="menu">
+            <div data-role="header" style="height: 40px;">
+                <a href="#assess-start" data-icon="arrow-l" data-direction="reverse">Back</a>
+                <h2>Miles for Marriage</h2>
+            </div>
+            <form>
+                <h3>To:</h3>
+                <input type="text" name="end_location" id ="end_location" value="Cork">
+                
+                <script>
+                    function updateNames( end_location ){
+                        var name = $( "#end_location" ).val();
+                        data.name = end_location;
+
+                        $( ".end_locations" ).each(function() {
+                            var currentElement = $(this);
+                            currentElement.html( end_location );
+                        });
+                    }
+                </script>
+                
+                <h3> From: </h3>
+                <input type="text" name="start_location" id ="start_location" value="Dublin"> 
+             </form>
+                
+                <div class="answers">
+                    <a href="#InjuryInfo" data-role="button" onclick="updateNames( data.name );">Next</a>
+                          <!-- progres bar -->
+                    <div role="application" class="ui-slider-track ui-btn-down-c ui-btn-corner-all" style="margin: 0px 15px;"><div class="ui-slider-bg ui-btn-active ui-btn-corner-all" style="width: 30%; height:20px;"></div><a href="#" class="ui-slider-handle ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100" title="100" aria-labelledby="slider-label" style="left: 100%; display: none;"><span class="ui-btn-inner"><span class="ui-btn-text"></span></span></a></div>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" id="InjuryInfo">
+            <div data-role="header" style="height: 40px;">
+                <a href="#UserInfo" data-icon="arrow-l" data-direction="reverse">Back</a>
+                <h2>Assessment</h2>
+            </div>
+        <form>
+            <h2> When was <span class="names"></span> hurt? </h2>
+    
+    	<label for="date-1">Date:</label>
+    	<input type="text" data-clear-btn="false" name="date-1" id="date-1" value="June 13, 2010">
+    	
+    	<label for="time-1">Time:</label>
+    	<input type="text" data-clear-btn="false" name="time-1" id="time-1" value="1:23 pm">
+    	
+        <label for="select-choice-0" class="select"><h2> How did <span class="names"></span> get hurt? </h2></label>
+		<select name="select-choice-0" id="select-choice-0">
+   			<option value="MotorVehicleAccident">Motor vehicle accident</option>
+   			<option value="Sports">Sports</option>
+   			<option value="Fall">Fall</option>
+   			<option value="Accident">Accident</option>
+   			<option value="Other">Other</option>
+		</select>	
+        </form>
+        
+                        <div class="answers">
+                    <a href="#conscious" data-role="button">Next</a>
+                          <!-- progres bar -->
+                    <div role="application" class="ui-slider-track ui-btn-down-c ui-btn-corner-all" style="margin: 0px 15px;"><div class="ui-slider-bg ui-btn-active ui-btn-corner-all" style="width: 40%; height:20px;"></div><a href="#" class="ui-slider-handle ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100" title="100" aria-labelledby="slider-label" style="left: 100%; display: none;"><span class="ui-btn-inner"><span class="ui-btn-text"></span></span></a></div>
+                </div>
+                
+        </div>
+        
+         <div data-role="page" id="conscious">
+            <div data-role="header" style="height: 40px;">
+                <a href="#InjuryInfo" data-icon="arrow-l" data-direction="reverse">Back</a>
+                <h2>Assessment</h2>
+            </div>
+            <form>
+            <h1>Did <span class="names"></span> lose consciousness (pass out)?</h1>
+
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input onclick="onUnconscious()" type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" >
+                    <label for="radio-choice-h-2a">Yes</label>
+                    <input onclick="onConscious()" type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                    <label for="radio-choice-h-2b">No</label>
+                </fieldset>
+        
+            <div id="out">
+                <h2>If so, how long was <span class="names"></span> out for? </h2>
+                <input type="number" name="number" id="number-pattern" value="1" style="display:inline; width:20%; text-align:right;"><span> Minutes</span> 
+            </div>
+            </form>
+            <script>
+                $( "#out" ).hide();
+
+                function onUnconscious(){
+                    $( "#out" ).fadeIn();
+                }
+
+                function onConscious(){
+                   $( "#out" ).fadeOut();
+                }
+            </script>
+
+            <div class="answers">
+            <a href="#unsteady" data-role="button">Next</a>
+            <!-- progres bar -->
+            <div role="application" class="ui-slider-track ui-btn-down-c ui-btn-corner-all" style="margin: 0px 15px;"><div class="ui-slider-bg ui-btn-active ui-btn-corner-all" style="width: 50%; height:20px;"></div><a href="#" class="ui-slider-handle ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100" title="100" aria-labelledby="slider-label" style="left: 100%; display: none;"><span class="ui-btn-inner"><span class="ui-btn-text"></span></span></a></div>
+            </div>
+
+        </div>
+
+        <!-- ASSESSMENT OPTIONS -->
+
+        
+        <div data-role="page" id="unsteady">
+        <div data-role="header" style="height: 40px;">
+                <a href="#conscious" data-icon="arrow-l" data-direction="reverse">Back</a>
+                <h2>Assessment</h2>
+            </div>
+            <div >
+            <form>
+                <h2>Was <span class="names"></span> unsteady? </h2>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" >
+                    <label for="radio-choice-h-2a">Yes</label>
+                    <input  type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                    <label for="radio-choice-h-2b">No</label>
+                </fieldset>
+            </form>
+            
+            </div>
+            <div class="answers">
+            <a href="#eyes" data-role="button">Next</a>
+            <!-- progres bar -->
+            <div role="application" class="ui-slider-track ui-btn-down-c ui-btn-corner-all" style="margin: 0px 15px;"><div class="ui-slider-bg ui-btn-active ui-btn-corner-all" style="width: 60%; height:20px;"></div><a href="#" class="ui-slider-handle ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100" title="100" aria-labelledby="slider-label" style="left: 100%; display: none;"><span class="ui-btn-inner"><span class="ui-btn-text"></span></span></a></div>
+			</div>        
+        </div>
+   
+<div data-role="page" id="eyes">
+        <div data-role="header" style="height: 40px;">
+                <a href="#unsteady" data-icon="arrow-l" data-direction="reverse">Back</a>
+                <h2>Assessment</h2>
+            </div>
+            <form>
+                <h2> Eyes: </h2>
+                <h3>Are <span class="names"></span>'s eyes opening and closing properly? </h3>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input onclick="EyesWorking()" type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" >
+                    <label for="radio-choice-h-2a">Yes</label>
+                    <input onclick="EyesNotWorking()" type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                    <label for="radio-choice-h-2b">No</label>
+                </fieldset>
+        
+           <div id="eyesNotok">
+           		<h3>Can <span class="names"></span> open his/her eyes when you ask them to? </h3>
+             <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" onclick="addPoints( 3 );">
+                    <label for="radio-choice-h-2a">Yes</label>
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off" onclick="addPoints( 2 )">
+                    <label for="radio-choice-h-2b">No</label>
+                </fieldset>
+           </div>
+            </form>
+           
+            <script>
+				$( "#eyesNotok" ).hide();
+					
+                function EyesWorking(){
+                    $( "#eyesNotok" ).fadeOut();
+                    addPoints( 4 );
+                }
+                function EyesNotWorking(){
+                   $( "#eyesNotok" ).fadeIn();
+                }
+            </script>
+            <div class="answers">
+            <a href="#location" data-role="button">Next</a>
+            
+            <!-- progres bar -->
+            <div role="application" class="ui-slider-track ui-btn-down-c ui-btn-corner-all" style="margin: 0px 15px;"><div class="ui-slider-bg ui-btn-active ui-btn-corner-all" style="width: 70%; height:20px;"></div><a href="#" class="ui-slider-handle ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100" title="100" aria-labelledby="slider-label" style="left: 100%; display: none;"><span class="ui-btn-inner"><span class="ui-btn-text"></span></span></a></div>
+			</div>
+        </div>
+   		</div> 
+
+    <div data-role="page" id="location">
+        <div data-role="header" style="height: 40px;">
+                <a href="#eyes" data-icon="arrow-l" data-direction="reverse">Back</a>
+                <h2>Assessment</h2>
+            </div>
+            <form>
+                <h3>Can <span class="names"></span> tell you where (s)he is?</h3>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input onclick="LocationCorrect()" type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" >
+                    <label for="radio-choice-h-2a">Yes</label>
+                    <input onclick="LocationIncorrect()" type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                    <label for="radio-choice-h-2b">No</label>
+                </fieldset>
+        
+           <div id="locationNotok">
+                <h3>Can <span class="names"></span> speak coherently? </h3>
+             <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input onclick="addPoints( 4 );" type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" >
+                    <label for="radio-choice-h-2a">Yes</label>
+                    <input onclick="addPoints( 3 )" type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                    <label for="radio-choice-h-2b">No</label>
+                </fieldset>
+           </div>
+            </form>
+           
+            <script>
+                $( "#locationNotok" ).hide();
+                    
+                function LocationCorrect(){
+                $( "#locationNotok" ).fadeOut();
+                addPoints( 5 );
+                }
+                function LocationIncorrect(){
+                   $( "#locationNotok" ).fadeIn();
+                }
+            </script>
+            <div class="answers">
+
+      
+            <a href="#clap" data-role="button">Next</a>
+            <!-- progres bar -->
+            <div role="application" class="ui-slider-track ui-btn-down-c ui-btn-corner-all" style="margin: 0px 15px;"><div class="ui-slider-bg ui-btn-active ui-btn-corner-all" style="width: 80%; height:20px;"></div><a href="#" class="ui-slider-handle ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100" title="100" aria-labelledby="slider-label" style="left: 100%; display: none;"><span class="ui-btn-inner"><span class="ui-btn-text"></span></span></a></div>
+            </div>
+        </div>
+        </div> 
+
+        <div data-role="page" id="clap">
+            <div data-role="header" style="height: 40px;">
+                <a href="#location" data-icon="arrow-l" data-direction="reverse">Back</a>
+                <h2>Assessment</h2>
+            </div>
+            <form>
+                <h3>Can <span class="names"></span> clap his/her hands?</h3>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input onclick="ClapYes()" type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" >
+                    <label for="radio-choice-h-2a">Yes</label>
+                    <input onclick="ClapNo()" type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                    <label for="radio-choice-h-2b">No</label>
+                </fieldset>
+            </form>
+        
+           <div id="NoClap">
+                <h3>Pinch <span class="names"></span> enough that it hurts. Did <span class="names"></span> react to the pain normally?</h3>
+             <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input onclick="addPoints( 4) " type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" >
+                    <label for="radio-choice-h-2a">Yes</label>
+                    <input onclick="addPoints( 3 )" type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                    <label for="radio-choice-h-2b">No</label>
+            </fieldset>
+           </div>
+            
+            <script>
+                $( "#NoClap" ).hide();
+                    
+                function ClapYes(){
+                    $( "#NoClap" ).fadeOut();
+                    addPoints( 6 );
+                }
+                function ClapNo(){
+                   $( "#NoClap" ).fadeIn();
+                }
+            </script>
+           
+            <div class="answers">
+            <a onclick="updatePoints()" data-role="button">Next</a>
+            <!-- progres bar -->
+            <div role="application" class="ui-slider-track ui-btn-down-c ui-btn-corner-all" style="margin: 0px 15px;"><div class="ui-slider-bg ui-btn-active ui-btn-corner-all" style="width: 90%; height:20px;"></div><a href="#" class="ui-slider-handle ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100" title="100" aria-labelledby="slider-label" style="left: 100%; display: none;"><span class="ui-btn-inner"><span class="ui-btn-text"></span></span></a></div>
+            </div>
+        </div>
+
+        <div data-role="page" id="assess-result">
+            <form>
+                <h1>WARNING!</h1>
+                <h2><span id="points"></span> /15 Points</h2>
+                <h2>Go to your nearest emergency department. You may have suffered form a moderate head injury.</h2>
+		    </form>
+        <section id="wrapper">
+            <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+            <article id="map"></article>
+            <script>
+            function success(position) {
+              var mapcanvas = document.createElement('div');
+              mapcanvas.id = 'mapcanvas';
+              mapcanvas.style.width = '320px';
+              mapcanvas.style.height = '100px';
+                
+              document.querySelector('#map').appendChild(mapcanvas);
+              
+              var latlng = new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
+              var myOptions = {
+                zoom: 15,
+                center: latlng,
+                mapTypeControl: false,
+                navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+              var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+              map.setCenter( latlng );
+              
+              var marker = new google.maps.Marker({
+                  position: latlng, 
+                  map: map, 
+                  title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+              });
+            }
+
+            function error(msg) {
+              s.innerHTML = typeof msg == 'string' ? msg : "failed";
+              s.className = 'fail';
+            }
+
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(success, error);
+            } else {
+              error('not supported');
+            }
+
+            </script>    
+        </section>
+
+        <script>
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script>
+        try {
+        var pageTracker = _gat._getTracker("UA-1656750-18");
+        pageTracker._trackPageview();
+        } catch(err) {}</script>
+        
+        <div class="answers">
+            <a href="#menu" data-role="button">Back</a>
+        </div>
+        </div>
+       
+        <div data-role="page" id="cognitive-assessment-week">
+            <div data-role="header" style="height: 40px;">
+                <a href="#menu" data-icon="delete">Back</a>
+                <h1>Orientation</h1>
+            </div>
+            <div>
+            <h2>What is the day of the week?</h1>
+            <p>Click 'Yes' if <span class="names"></span> answered the question correctly.</p>
+            <form>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" >
+                    <label for="radio-choice-h-2a">Yes</label>
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off" >
+                    <label for="radio-choice-h-2b">No</label>
+                </fieldset>
+            </form>
+            <a href="#cognitive-assessment-year" data-role="button">Next</a>
+            </div>
+        </div>
+         
+         <div data-role="page" id="cognitive-assessment-year">
+            <div data-role="header" style="height: 40px;">
+                <a href="#menu" data-icon="delete">Back</a>
+                <h1>Orientation</h1>
+            </div>
+            <div>
+            <h2>What is the current year?</h1>
+            <p>Click 'Yes' if <span class="names"></span> answered the question correctly.</p>
+            <form>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" >
+                    <label for="radio-choice-h-2a">Yes</label>
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off" >
+                    <label for="radio-choice-h-2b">No</label>
+                </fieldset>
+            </form>
+            <a href="#cognitive-assessment-time" data-role="button">Next</a>
+            </div>
+        </div>
+
+        <div data-role="page" id="cognitive-assessment-time">
+            <div data-role="header" style="height: 40px;">
+                <a href="#menu" data-icon="delete">Back</a>
+                <h1>Orientation</h1>
+            </div>
+            
+            <h2>What is the current time?</h1>
+            <p>(must be within 1 hour of actual time)</p>
+            <p>Click 'Yes' if <span class="names"></span> answered the question correctly.</p>
+            <form>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" >
+                    <label for="radio-choice-h-2a">Yes</label>
+                    <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off" >
+                    <label for="radio-choice-h-2b">No</label>
+                </fieldset>
+            </form>
+        </div>
+        <!-- MANAGE section -->
+        <div data-role="page" id="manage_menu">
+            <div>
+                <h1> Manage Your Symptoms </h1>
+                <a href="#your-symptoms" data-role="button">Your Symptoms</a>
+                <a href="#common-symptoms" data-role="button">Common Symptoms</a>
+                <a href="#tips" data-role="button">Tips</a>
+            </div>
+        </div>
+        <script>
+            //Splash screen
+            setTimeout( function(){
+                window.location.hash = "menu";
+            }, 1000 );
+
+            //assess 1
+            function onAnswer( question, answer ){
+                data[question] = answer;
+            }
+        </script>
+    </body>
+</html>
