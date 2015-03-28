@@ -1,9 +1,17 @@
-var express = require( 'express' );
-var app = express();
+var express = require( 'express' ),
+    app = express(),
+    bodyparser = require('body-parser'),
+    low = require('lowdb'),
+    db = low('db.json', {
+      autosave: true, // automatically save database on change (default: true)
+      async: true     // asyncrhonous write (default: true)
+    });
 
 app.use( express.static( __dirname + '/../www' ) );
+app.use(bodyparser.json());
 
 //landing page
+
 
 app.get('/directions', function (req, res) {
     var _from = req.query['from']
@@ -14,6 +22,7 @@ app.get('/directions', function (req, res) {
     var width = 480
     res.send("<iframe src='" + url + "' height='" + height + "' width='" + width + "'></iframe>");
 });
+
 app.get('/tweet', function (req, res) {
     var _from = req.query['from']
     var _to = req.query['to']
@@ -31,6 +40,36 @@ app.get('/tweet', function (req, res) {
             "(document,'script', 'twitter-wjs');</script>");
     
 });
+
+app.get('/miles', function (req, res) {
+  var mileRecords = db('miles').find(),
+  miles = 0;
+
+  mileRecords.forEach(function (record) {
+    miles += record;
+  });
+
+  res.end(miles);
+});
+
+
+app.post("/calculate", function (req, res) {
+
+  var route = {
+    image : req.body.image,
+    url   : Math.random().toString(36).substring(7),
+    miles : req.body.miles,
+    routeText : req.body.routeText
+  };  
+
+  db('results').push(route);
+
+  db('miles').push(route.miles);
+
+  res.end(route.url);
+
+});
+
 var server = app.listen( 3000, function() {
     console.log('Listening on port %d', server.address().port);
 });
