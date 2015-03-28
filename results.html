@@ -1,0 +1,117 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<script src="js/bootstrap.min.js"></script>
+<script src="js/fbsdk.js"></script>
+
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {parsetags: 'explicit'}
+</script>
+
+</head>
+<body>
+
+<div id="map" style="width: 50%; display:inline-block;">
+	&nbsp;
+</div>
+
+<div id="rightbar" style="width: 40%; display:inline-block;">
+	<div id="resultsinfo">
+
+
+	<p>I'm travelling <span id="milecount"></span> miles for marriage equality</p>
+
+	<p> </p>
+
+	</div>
+
+	<div id="extrainfo">
+
+	<div class="bs-example">
+	    <div class="panel-group" id="accordion">
+	        <div class="panel panel-default">
+	            <div class="panel-heading">
+	                <h4 class="panel-title">
+	                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">I want to vote closer</a>
+	                </h4>
+	            </div>
+	            <div id="collapseOne" class="panel-collapse collapse in">
+	                <div class="panel-body">
+                        <p>To update your voter registration address, you will need to use form <a href="http://www.checktheregister.ie/PublicPages/AppForms.aspx" target="_blank">RFA3</a>. Take this form to your nearest Garda station with photo ID, so that they can confirm your identity. The completed form needs to arrive at your council at least 15 days before the referendum.</a></p>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="panel panel-default">
+	            <div class="panel-heading">
+	                <h4 class="panel-title">
+	                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">I want to donate</a>
+	                </h4>
+	            </div>
+	            <div id="collapseTwo" class="panel-collapse collapse">
+	                <div class="panel-body">
+	                          	To donate, visit yesequality.ie's <a href="https://www.yesequality.ie/donate/">donation page</a>.
+	                	<p><b>Where does the money go?</b></p>
+<p>&euro;25 = 100 badges to help spread the Yes Equality message</p>
+<p>&euro;50 = We can print 5,000 Yes Equality leaflets for canvassing in communities throughout the country</p>
+<p>&euro;75 = We can print and install 10 Yes Equality posters in local communities</p>
+<p>&euro;100 = We can run a Facebook ad for 2 weeks, with a total reach of 40,600 people
+</p>
+	                </div>
+	            </div>
+	        </div>
+	
+	    </div>
+	</div>
+
+	</div>
+
+</div>
+<!-- END #rightbar -->
+
+
+
+	<div id="sharebuttons" style="width:100%;text-align:center;">
+		<a class="" id="twittershare" href="" style="display:none;">Tweet</a>
+
+		<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+		
+		<g:plus action="share" annotation="bubble"></g:plus>
+	</div>
+
+<script>
+
+$(document).ready(function(){
+
+	var miles = 300;
+	var shareUrl = window.location.href;
+	var encodedUrl = encodeURIComponent(shareUrl);
+	var shareText = "I will be travelling " + miles + " miles for marriage equality";
+	var hashTags = "marref,milesformarriage";
+	var countUrl = "http://www.google.ie";
+
+	var twitterBtnHref = "https://twitter.com/share?text=" + shareText + "&url=" + encodedUrl + "&hashtags=" + hashTags + "&counturl=" + countUrl + "&via=yesequality2015";
+
+
+	$("#milecount").text(miles);
+	showTwitterShareButton(twitterBtnHref);
+gapi.plusone.go();
+	$(".collapse").collapse()
+});
+
+
+function showTwitterShareButton(twitterBtnHref){
+	$("#twittershare").attr('href', twitterBtnHref);
+	$("#twittershare").removeAttr('style');
+	$("#twittershare").addClass('twitter-share-button');
+
+}
+
+
+	window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+</script>
+
+
+</body>
+</html>
