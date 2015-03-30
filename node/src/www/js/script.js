@@ -14,6 +14,8 @@
 
      $canvas : $('canvas'),
 
+     $calculate : $('input[type=image]'),
+
 
      setToLocation : function (name, latitude, longitude) {
 
@@ -136,7 +138,34 @@
         
      },
 
+     submitInput : function ( ) {
+      if (!this.toLocation.waiting && !this.toLocation.waiting)
+        $.ajax({
+         type : "POST",
+         url : "/calculate",
+         dataType : "json",
+         data : {
+          //image : this.canvas.toDataURL(),
+           routeTo     : this.toLocation.name,
+          routeFrom    : this.fromLocation.name, 
+          location1lon : this.fromLocation.longitude,
+          location1lat : this.fromLocation.latitude,
+          location2lon : this.toLocation.longitude,
+          location2lat : this.toLocation.latitude
+         }
+       }).done(function (response) {
+
+         window.location.href=("/result/"+response.url);
+
+
+       }).error(function (error) {
+          alert("OOPS!)");
+       });
+
+     },
+
      init : function () {
+      var that = this;
 
 
       this.canvas = Widget.$canvas.get(0);
@@ -148,38 +177,40 @@
       this.endImage = new Image();
       this.endImage.src = "/image/end.png";
 
+
+      this.$townTo
+       .bind('keyup', function (e, loc) {
+         $(e.target).siblings('small').removeClass('hidden');
+
+       });
+
       this.$townTo.geocomplete( { country : 'ie' })
        .bind('geocode:result', function (e, loc) {
         Widget.setToLocation(loc.address_components[0].long_name, loc.geometry.location.k, loc.geometry.location.D);
+        $(e.target).siblings('small').addClass('hidden');
        })
+      
+      this.$townFrom
+       .bind('keyup', function (e, loc) {
+         $(e.target).siblings('small').removeClass('hidden');
+
+       });
         
       this.$townFrom.geocomplete( { country : 'ie' })
        .bind('geocode:result', function (e, loc) {
         Widget.setFromLocation(loc.address_components[0].long_name, loc.geometry.location.k, loc.geometry.location.D);
+        $(e.target).siblings('small').addClass('hidden');
        })
 
       this.sizeCanvas();
       this.copyImageToCanvas();
 
-     },
 
-     toRadians : function (angle) {
-       return value * Math.PI / 180;
-     },
+      this.$calculate.click(function () {
+        that.submitInput.bind(that)();
+      });
 
-     calcCrow : function (lat1, lon1, lat2, lon2) {
-        var R = 3963,
-            dLat = toRad(lat2-lat1),
-            dLon = toRad(lon2-lon1),
-            lat1 = toRad(lat1),
-            lat2 = toRad(lat2),
-            a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2),
-            c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)),
-            d = R * c;
-
-        return d;
      }
-
      
 
   };
